@@ -1,10 +1,10 @@
 
 var baseUrl = 'https://api.parse.com/1',
-    appId = '0bGjHi6wVuMFv6yCKEqG19nwbZuDk7JZ9hkLRmeJ',
-    apiKey = 'p4wHJgUNyx0Dzms8S0GgDxH44DIILIQgs8G6wJGD', // make sure to use the REST API Key,
-    masterKey = 'jHKB2gSWCgKvV8JVF9Lc3nVokMDFUE3eO4AfG0xA';
+    appId = 'ADD YOUR KEY HERE',
+    apiKey = 'ADD YOUR KEY HERE', // make sure to use the REST API Key,
+    masterKey = 'ADD YOUR KEY HERE';
  
-var _register = function(params, lambda, lambdaerror) {
+var _register = function(params, successCB, errorCB) {
     var method = 'POST',
         url = baseUrl + '/installations',
         payload = (params) ? JSON.stringify(params) : '';
@@ -12,10 +12,10 @@ var _register = function(params, lambda, lambdaerror) {
     _helper(url, method, payload, function(data, status) {
         Ti.API.log('completed registration: ' + JSON.stringify(status));
        
-        lambda(data, status);
+        successCB && successCB(data, status);
     }, function(xhr, error) {
         Ti.API.log('error registration: ' + JSON.stringify(error));
-        lambdaerror(error);
+        errorCB && errorCB(error);
     });
 };
 
